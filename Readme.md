@@ -1,7 +1,7 @@
 # Учебный проект «Код и Магия» [![Build status][travis-image]][travis-url]
 
 * Студент: [Андрей Бодаль](https://up.htmlacademy.ru/javascript/19/user/932123).
-* Наставник: `Неизвестно`.
+* Наставник: `Виктор Кан`.
 
 ---
 
