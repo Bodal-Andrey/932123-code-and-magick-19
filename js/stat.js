@@ -40,7 +40,7 @@ window.renderStatistics = function (ctx, names, times) {
 
   var renderBar = function (color) {
     ctx.fillStyle = color;
-    ctx.fillRect(CLOUD_X + BAR_GAP + (TEXT_WIDTH + BAR_GAP) * i, (CLOUD_Y + CLOUD_HEIGHT) - GAP * 4, BAR_WIDTH, -(BAR_HEIGHT * times[i]) / maxTime); 
+    ctx.fillRect(CLOUD_X + BAR_GAP + (TEXT_WIDTH + BAR_GAP) * i, (CLOUD_Y + CLOUD_HEIGHT) - GAP * 4, BAR_WIDTH, -(BAR_HEIGHT * times[i]) / maxTime);
   };
 
   for (var i = 0; i < names.length; i++) {
