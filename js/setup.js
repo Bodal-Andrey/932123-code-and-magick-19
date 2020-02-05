@@ -2,7 +2,6 @@
 
 // Показывает окно настроек пользователя
 var userDialog = document.querySelector('.setup');
-userDialog.classList.remove('hidden');
 
 document.querySelector('.setup-similar').classList.remove('hidden');
 
@@ -66,3 +65,74 @@ function showSetup() {
 
 showSetup();
 
+// Открытие/закрытие окна настройки персонажа
+var MIN_NAME_LENGTH = 2;
+var MAX_NAME_LENGTH = 25;
+var ESC_KEY = 'Escape';
+var ENTER_KEY = 'Enter';
+var setup = document.querySelector('.setup');
+var setupOpen = document.querySelector('.setup-open');
+var setupClose = setup.querySelector('.setup-close');
+var userNameInput = setup.querySelector('.setup-user-name');
+
+var onPopupEscPress = function (evt) {
+  if (evt.key === ESC_KEY) {
+    closePopup();
+  }
+};
+
+var openPopup = function () {
+  setup.classList.remove('hidden');
+  document.addEventListener('keydown', onPopupEscPress);
+};
+
+var closePopup = function () {
+  setup.classList.add('hidden');
+  document.removeEventListener('keydown', onPopupEscPress);
+};
+
+setupOpen.addEventListener('click', function () {
+  openPopup();
+});
+
+setupOpen.addEventListener('keydown', function (evt) {
+  if (evt.key === ENTER_KEY) {
+    openPopup();
+  }
+});
+
+setupClose.addEventListener('click', function () {
+  closePopup();
+});
+
+setupClose.addEventListener('keydown', function (evt) {
+  if (evt.key === ENTER_KEY) {
+    closePopup();
+  }
+});
+
+// userNameInput.addEventListener('invalid', function (evt) {
+//   if (userNameInput.validity.tooShort) {
+//     userNameInput.setCustomValidity('Имя должно состоять минимум из 2-х символов');
+//   } else if (userNameInput.validity.tooLong) {
+//     userNameInput.setCustomValidity('Имя не должно превышать 25-ти символов');
+//   } else if (userNameInput.validity.valueMissing) {
+//     userNameInput.setCustomValidity('Обязательное поле');
+//   } else {
+//     userNameInput.setCustomValidity('');
+//   }
+// });
+
+userNameInput.addEventListener('input', function (evt) {
+  var target = evt.target;
+
+  if (target.validity.valueMissing) {
+    target.setCustomValidity('Обязательное поле');
+  } else if (target.value.length < MIN_NAME_LENGTH) {
+    target.setCustomValidity('Имя должно состоять минимум из ' + MIN_NAME_LENGTH + '-х символов');
+  } else if (target.value.length > MAX_NAME_LENGTH) {
+    target.setCustomValidity('Имя не должно превышать ' + MAX_NAME_LENGTH + '-ти символов');
+  } else {
+    target.setCustomValidity('');
+  }
+});
