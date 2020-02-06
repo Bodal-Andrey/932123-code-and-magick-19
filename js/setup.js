@@ -12,6 +12,7 @@ var WIZARD_NAMES = ['Иван', 'Хуан Себастьян', 'Мария', 'К
 var WIZARD_SECONDNAMES = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
 var WIZARD_COATS = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
 var WIZARD_EYES = ['black', 'red', 'blue', 'yellow', 'green'];
+var FIREBALL_COLORS = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'];
 
 function getRandomInt(max) {
   return Math.floor(Math.random() * max);
@@ -135,4 +136,37 @@ userNameInput.addEventListener('input', function (evt) {
   } else {
     target.setCustomValidity('');
   }
+});
+
+// Изменение цвета мантии, глаз и файербола
+var changeColor = document.querySelector('.setup-wizard');
+var changeCoatColor = changeColor.querySelector('.wizard-coat');
+var changeEyesColor = changeColor.querySelector('.wizard-eyes');
+var changeFireballColor = document.querySelector('.setup-fireball-wrap');
+
+var getRandomCoat = function () {
+  changeCoatColor.style.fill = getRandomElement(WIZARD_COATS);
+  document.querySelector('input[name="coat-color"]').value = changeCoatColor.style.fill;
+};
+
+var getRandomEyes = function () {
+  changeEyesColor.style.fill = getRandomElement(WIZARD_EYES);
+  document.querySelector('input[name="eyes-color"]').value = changeEyesColor.style.fill;
+};
+
+var getRandomFireballs = function () {
+  changeFireballColor.style.background = getRandomElement(FIREBALL_COLORS);
+  changeFireballColor.querySelector('input').value = changeFireballColor.style.background;
+};
+
+changeCoatColor.addEventListener('click', function () {
+  getRandomCoat();
+});
+
+changeEyesColor.addEventListener('click', function () {
+  getRandomEyes();
+});
+
+changeFireballColor.addEventListener('click', function () {
+  getRandomFireballs();
 });
