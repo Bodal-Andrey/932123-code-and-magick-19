@@ -155,8 +155,10 @@ var getRandomEyes = function () {
 };
 
 var getRandomFireballs = function () {
-  changeFireballColor.style.background = getRandomElement(FIREBALL_COLORS);
-  changeFireballColor.querySelector('input').value = changeFireballColor.style.background;
+  var randomFireballColor = getRandomElement(FIREBALL_COLORS);
+
+  changeFireballColor.style.background = randomFireballColor;
+  changeFireballColor.querySelector('input').value = randomFireballColor;
 };
 
 changeCoatColor.addEventListener('click', function () {
