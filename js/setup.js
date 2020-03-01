@@ -3,11 +3,7 @@
 // Показывает окно настроек пользователя
 (function () {
   var setup = document.querySelector('.setup');
-  var similarListElement = document.querySelector('.setup-similar-list');
-  var similarWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
   var form = setup.querySelector('.setup-wizard-form');
-
-  document.querySelector('.setup-similar').classList.remove('hidden');
 
   form.addEventListener('submit', function (evt) {
     window.save(new FormData(form), function () {
@@ -16,26 +12,9 @@
     evt.preventDefault();
   });
 
-  var renderWizard = function (wizard) {
-    var wizardElement = similarWizardTemplate.cloneNode(true);
-
-    wizardElement.querySelector('.setup-similar-label').textContent = wizard.name;
-    wizardElement.querySelector('.wizard-coat').style.fill = wizard.colorCoat;
-    wizardElement.querySelector('.wizard-eyes').style.fill = wizard.colorEyes;
-
-    return wizardElement;
-  };
-
-  var onGetSuccess = function (wizards) {
-    var fragment = document.createDocumentFragment();
-
-    for (var i = 0; i < 4; i++) {
-      fragment.appendChild(renderWizard(wizards[i]));
-    }
-
-    similarListElement.appendChild(fragment);
-    setup.querySelector('.setup-similar').classList.remove('hidden');
-
+  var onGetSuccess = function (data) {
+    window.changecolor.wizards = data;
+    window.changecolor.updateWizards();
   };
 
   var onGetError = function (errorMessage) {
