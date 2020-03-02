@@ -1,6 +1,6 @@
 'use strict';
 
-// Изменение цвета мантии, глаз и файербола
+// Модуль настройки мага
 (function () {
   var FIREBALL_COLORS = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'];
   var WIZARD_COATS = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
@@ -10,14 +10,21 @@
   var changeEyesColor = changeColor.querySelector('.wizard-eyes');
   var changeFireballColor = document.querySelector('.setup-fireball-wrap');
 
+  var wizard = {
+    onCoatChange: function () {},
+    onEyesChange: function () {}
+  };
+
   var getRandomCoat = function () {
-    changeCoatColor.style.fill = window.random.getRandomElement(WIZARD_COATS);
-    document.querySelector('input[name="coat-color"]').value = changeCoatColor.style.fill;
+    var newColor = window.random.getRandomElement(WIZARD_COATS);
+    changeCoatColor.style.fill = newColor;
+    wizard.onCoatChange(newColor);
   };
 
   var getRandomEyes = function () {
-    changeEyesColor.style.fill = window.random.getRandomElement(WIZARD_EYES);
-    document.querySelector('input[name="eyes-color"]').value = changeEyesColor.style.fill;
+    var newColor = window.random.getRandomElement(WIZARD_EYES);
+    changeEyesColor.style.fill = newColor;
+    wizard.onEyesChange(newColor);
   };
 
   var getRandomFireballs = function () {
@@ -38,4 +45,6 @@
   changeFireballColor.addEventListener('click', function () {
     getRandomFireballs();
   });
+
+  window.wizard = wizard;
 })();
