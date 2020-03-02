@@ -4,17 +4,16 @@
 (function () {
   var similar = document.querySelector('.setup-similar');
   var similarListElement = document.querySelector('.setup-similar-list');
-  var wizardTemplate = document.querySelector('#similar-wizard-template');
+  var wizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
 
   var renderWizard = function (wizard) {
-    var element = wizardTemplate.content.cloneNode(true);
+    var wizardElement = wizardTemplate.cloneNode(true);
 
-    var wizardElement = element.querySelector('.wizard');
     wizardElement.querySelector('.setup-similar-label').textContent = wizard.name;
     wizardElement.querySelector('.wizard-coat').style.fill = wizard.colorCoat;
     wizardElement.querySelector('.wizard-eyes').style.fill = wizard.colorEyes;
 
-    return element;
+    return wizardElement;
   };
 
   window.render = function (data) {
